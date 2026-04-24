@@ -1,0 +1,29 @@
+apiVersion: kaptain.org/1.15
+kind: kubernetes-bundle-docker-retag
+
+spec:
+  global:
+    projectName:
+      stripRepositoryNamePrefix: test
+    configSubPath: config
+    tokens:
+      delimiterStyle: shell
+      nameStyle: lower-kebab
+      nameValidation: ALL
+      valueTrailingNewline: preserve-all
+  main:
+    docker:
+      retag:
+        sourceRegistry: docker.io
+        sourceNamespace: library
+        sourceImageName: nginx
+        sourceTag: '1.27'
+    hooks:
+      preBuild: test-hooks/pre-build.bash
+      preTaggingTests: test-hooks/pre-tagging-tests.bash
+      postVersionsAndNaming: test-hooks/post-versions-and-naming.bash
+      preDockerPrepare: test-hooks/pre-docker-prepare.bash
+      postDockerTests: test-hooks/post-docker-tests.bash
+      prePackagePrepare: test-hooks/pre-package-prepare.bash
+      postPackageTests: test-hooks/post-package-tests.bash
+      postBuild: test-hooks/post-build.bash
