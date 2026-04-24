@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-kube-bundle-docker-retag
+  labels:
+    app: test-kube-bundle-docker-retag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-kube-bundle-docker-retag
+  template:
+    metadata:
+      labels:
+        app: test-kube-bundle-docker-retag
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 8080
