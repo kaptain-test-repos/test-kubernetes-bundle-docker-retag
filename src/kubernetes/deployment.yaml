@@ -19,8 +19,3 @@ spec:
           image: nginx:1.27
           ports:
             - containerPort: 8080
-          env:
-            - name: EXTERNAL_HOST
-              value: ${external-host-name}
-            - name: SHARED_SECRET_REF
-              value: ${shared-secret-name}
